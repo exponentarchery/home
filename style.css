@@ -84,7 +84,7 @@ body {
   transform: translateX(-50%);
   width: 200px;
   height: 20px;
-  background: #ddd;
+  background: linear-gradient(to right, red, orange, yellow);
   border: 2px solid black;
   display: none;
   z-index: 10;
@@ -108,13 +108,6 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  animation: moveTip 2s infinite;
-}
-
-@keyframes moveTip {
-  0% { left: 0; }
-  50% { left: 190px; }
-  100% { left: 0; }
 }
 
 .hit-dot {
