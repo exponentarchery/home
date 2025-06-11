@@ -2,7 +2,7 @@ let score = 0;
 let aiming = false;
 let hasAimed = false;
 let barInterval = null;
-let barDirection = 1; // 1 = right, -1 = left
+let barDirection = 1;
 let barPos = 0;
 
 const scoreDisplay = document.getElementById("score");
@@ -58,20 +58,19 @@ function shoot() {
   timingBar.style.display = "none";
   bowImage.src = "release.gif";
 
-  let rel = barPos / 190;
+  // Scoring logic based on bar position
   let points = 0;
-  if (barPos >= 180 && barPos <= 190) {
-    points = 10;
-  } else if (barPos >= 160 && barPos <= 200) {
-    points = 7;
+  if (barPos >= 170) {
+    points = 9; // Yellow
+  } else if (barPos >= 110) {
+    points = 6; // Orange
   } else {
-    points = 4;
+    points = 4; // Red
   }
 
   score += points;
   scoreDisplay.textContent = "Score: " + score;
-
-  showHit(rel, points);
+  showHit(barPos / 190, points);
 
   setTimeout(() => {
     bowImage.src = "noammo.png";
@@ -84,7 +83,7 @@ function showHit(rel, points) {
   const rect = target.getBoundingClientRect();
 
   const x = rect.left + rect.width * (0.2 + 0.6 * rel);
-  const y = rect.top + rect.height * (0.2 + 0.6 * Math.random());
+  const y = rect.top + rect.height * (0.4 + 0.1 * Math.random());
 
   const dot = document.createElement("div");
   dot.className = "hit-dot";
