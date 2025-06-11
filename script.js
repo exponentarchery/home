@@ -1,55 +1,64 @@
 let score = 0;
 let aiming = false;
+let hasAimed = false;
 
 const scoreDisplay = document.getElementById("score");
+const bowImage = document.getElementById("bowImage");
 const arrow = document.getElementById("arrow");
-const bow = document.getElementById("bow");
-const aimVideo = document.getElementById("aimVideo");
-const releaseVideo = document.getElementById("releaseVideo");
-const bar = document.getElementById("bar");
 const timingBar = document.getElementById("timing-bar");
+const bar = document.getElementById("bar");
 
 document.addEventListener("keydown", (e) => {
-    if (e.key === "e" || e.key === "E") {
-        startAim();
-    }
+  if (e.key.toLowerCase() === "e" && !aiming) {
+    startAiming();
+  }
 });
-
-function startAim() {
-    if (aiming) return;
-    aiming = true;
-    timingBar.style.display = "block";
-    aimVideo.play();
-    aimVideo.onended = () => {
-        bow.src = "ready.png";
-    };
-}
 
 document.addEventListener("click", () => {
-    if (!aiming) return;
-    aiming = false;
-    releaseVideo.play();
-    releaseVideo.onended = () => {
-        timingBar.style.display = "none";
-        shootArrow();
-        bow.src = "noammo.png";
-    };
+  if (aiming && hasAimed) {
+    shootArrow();
+  }
 });
 
+function startAiming() {
+  aiming = true;
+  hasAimed = false;
+  bowImage.src = "aim.gif";
+  timingBar.style.display = "block";
+
+  setTimeout(() => {
+    bowImage.src = "ready.png";
+    hasAimed = true;
+  }, 1000); // Wait for aim.gif duration
+}
+
 function shootArrow() {
-    arrow.style.left = "200px";
-    const barPos = parseInt(window.getComputedStyle(bar).left);
-    let points = 0;
-    if (barPos > 75 && barPos < 95) {
-        points = 10;
-    } else if (barPos > 50 && barPos < 120) {
-        points = 7;
-    } else {
-        points = 4;
-    }
-    score += points;
-    scoreDisplay.textContent = "Score: " + score;
-    setTimeout(() => {
-        arrow.style.left = "-50px";
-    }, 1000);
+  hasAimed = false;
+  bowImage.src = "release.gif";
+  timingBar.style.display = "none";
+
+  // Show arrow moving
+  arrow.style.display = "block";
+  arrow.style.top = "50%";
+
+  const barPos = parseInt(window.getComputedStyle(bar).left);
+  let points = 0;
+
+  if (barPos >= 170 && barPos <= 180) {
+    points = 10;
+  } else if (barPos >= 150 && barPos <= 190) {
+    points = 7;
+  } else {
+    points = 4;
+  }
+
+  score += points;
+  scoreDisplay.textContent = "Score: " + score;
+
+  setTimeout(() => {
+    arrow.style.top = "80%";
+    arrow.style.display = "none";
+    bowImage.src = "noammo.png";
+    aiming = false;
+  }, 1000);
 }
