@@ -58,11 +58,10 @@ function shoot() {
   timingBar.style.display = "none";
   bowImage.src = "release.gif";
 
-  // Scoring logic based on bar position
   let points = 0;
   if (barPos >= 170) {
     points = 9; // Yellow
-  } else if (barPos >= 110) {
+  } else if (barPos >= 100) {
     points = 6; // Orange
   } else {
     points = 4; // Red
