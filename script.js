@@ -1,6 +1,9 @@
 let score = 0;
 let aiming = false;
 let hasAimed = false;
+let barInterval = null;
+let barDirection = 1; // 1 = right, -1 = left
+let barPos = 0;
 
 const scoreDisplay = document.getElementById("score");
 const bowImage = document.getElementById("bowImage");
@@ -25,6 +28,23 @@ function startAiming() {
   hasAimed = false;
   bowImage.src = "aim.gif";
   timingBar.style.display = "block";
+  barPos = 0;
+  tip.style.left = "0px";
+
+  if (barInterval) clearInterval(barInterval);
+  barDirection = 1;
+
+  barInterval = setInterval(() => {
+    barPos += barDirection * 2;
+    if (barPos >= 190) {
+      barDirection = -1;
+      barPos = 190;
+    } else if (barPos <= 0) {
+      barDirection = 1;
+      barPos = 0;
+    }
+    tip.style.left = `${barPos}px`;
+  }, 10);
 
   setTimeout(() => {
     bowImage.src = "ready.png";
@@ -34,16 +54,15 @@ function startAiming() {
 
 function shoot() {
   hasAimed = false;
-  bowImage.src = "release.gif";
+  clearInterval(barInterval);
   timingBar.style.display = "none";
+  bowImage.src = "release.gif";
 
-  const tipPos = parseInt(window.getComputedStyle(tip).left);
-  const rel = (tipPos - 0) / 190; // normalize between 0 and 1
+  let rel = barPos / 190;
   let points = 0;
-
-  if (tipPos >= 180 && tipPos <= 190) {
+  if (barPos >= 180 && barPos <= 190) {
     points = 10;
-  } else if (tipPos >= 160 && tipPos <= 200) {
+  } else if (barPos >= 160 && barPos <= 200) {
     points = 7;
   } else {
     points = 4;
