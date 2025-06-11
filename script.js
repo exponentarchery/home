@@ -58,17 +58,23 @@ function shoot() {
   timingBar.style.display = "none";
   bowImage.src = "release.gif";
 
+  // Accuracy scoring based on distance from center of bar
+  const center = 100; // center of timing bar
+  const tipCenter = barPos + 5; // +5 is half of the 10px width of tip
+  const distance = Math.abs(tipCenter - center);
+
   let points = 0;
-  if (barPos >= 170) {
-    points = 9; // Yellow
-  } else if (barPos >= 100) {
-    points = 6; // Orange
+  if (distance <= 10) {
+    points = 9; // yellow
+  } else if (distance <= 30) {
+    points = 6; // orange
   } else {
-    points = 4; // Red
+    points = 4; // red
   }
 
   score += points;
   scoreDisplay.textContent = "Score: " + score;
+
   showHit(barPos / 190, points);
 
   setTimeout(() => {
