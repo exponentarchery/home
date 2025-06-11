@@ -83,7 +83,7 @@ body {
   transform: translateX(-50%);
   width: 200px;
   height: 20px;
-  background: linear-gradient(to right, red, orange, yellow);
+  background: linear-gradient(to right, red, orange, yellow, orange, red);
   border: 2px solid black;
   display: none;
   z-index: 10;
