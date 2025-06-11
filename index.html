@@ -1,30 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Funny Archery Game</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>Exponent Archery</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div id="game">
-        <h1 id="score">Score: 0</h1>
-        <div id="target-area">
-            <div id="target">
-                <div class="zone yellow"></div>
-                <div class="zone orange"></div>
-                <div class="zone red"></div>
-            </div>
-            <img id="arrow" src="arrow.png" />
-        </div>
-        <div id="ground"></div>
-        <img id="bow" src="noammo.png" />
-        <video id="aimVideo" src="aim.gif" style="display:none"></video>
-        <video id="releaseVideo" src="release.gif" style="display:none"></video>
-        <div id="timing-bar">
-            <div id="bar"></div>
-        </div>
-        <p>Press "E" to aim and click to shoot!</p>
+  <h1 id="score">Score: 0</h1>
+
+  <div id="game-container">
+    <div id="target">
+      <div class="ring yellow"></div>
+      <div class="ring orange"></div>
+      <div class="ring red"></div>
     </div>
-    <script src="script.js"></script>
+
+    <img id="arrow" src="arrow.png" alt="Arrow" />
+
+    <div id="bow">
+      <img id="bowImage" src="noammo.png" alt="Bow" />
+    </div>
+
+    <div id="timing-bar">
+      <div id="bar"></div>
+    </div>
+  </div>
+
+  <p class="instructions">Press "E" to aim, click to release!</p>
+
+  <script src="script.js"></script>
 </body>
 </html>
