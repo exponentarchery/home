@@ -48,7 +48,7 @@ const slopeQuestions = [
 ];
 
 document.addEventListener("keydown", (e) => {
-  if (e.key.toLowerCase() === "e" && !aiming) {
+  if (e.key.toLowerCase() === "e" && !aiming && quizContainer.classList.contains("hidden")) {
     showQuiz();
   }
 });
@@ -95,7 +95,7 @@ function showIncorrect() {
   setTimeout(() => {
     overlay.classList.add("hidden");
     quizContainer.classList.add("hidden");
-  }, 3000); // now pauses for 3 seconds
+  }, 3000);
 }
 
 function startAiming() {
@@ -139,11 +139,11 @@ function shoot() {
 
   let points = 0;
   if (distance <= 10) {
-    points = 9;
+    points = 9; // yellow center
   } else if (distance <= 30) {
-    points = 6;
+    points = 6; // orange
   } else {
-    points = 4;
+    points = 4; // red
   }
 
   score += points;
@@ -183,3 +183,4 @@ function showHit(rel, points) {
     tag.remove();
   }, 2000);
 }
+
