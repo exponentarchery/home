@@ -4,7 +4,6 @@ let hasAimed = false;
 let barInterval = null;
 let barDirection = 1;
 let barPos = 0;
-let quizPassed = false;
 
 const scoreDisplay = document.getElementById("score");
 const bowImage = document.getElementById("bowImage");
@@ -17,21 +16,35 @@ const quizQuestion = document.getElementById("quiz-question");
 const quizOptions = document.getElementById("quiz-options");
 
 const slopeQuestions = [
-  ["(7,8) (3,9)", "-0.25"],
-  ["(8,5) (6,8)", "-1.5"],
-  ["(6,9) (7,1)", "-8"],
-  ["(3,4) (2,3)", "1"],
-  ["(5,3) (6,7)", "4"],
-  ["(9,6) (10,9)", "3"],
-  ["(8,4) (7,9)", "-5"],
-  ["(4,5) (7,7)", "0.6667"],
-  ["(7,5) (9,7)", "1"],
-  ["(3,2) (7,4)", "0.5"],
-  ["(6,8) (9,9)", "0.3333"],
-  ["(8,6) (4,7)", "-0.25"],
-  ["(6,5) (3,6)", "-0.3333"],
-  ["(9,2) (11,6)", "2"],
-  ["(-7,4) (-8,-1)", "5"],
+  { q: "(7,8) (3,9)", a: "-0.25" },
+  { q: "(8,5) (6,8)", a: "-1.5" },
+  { q: "(6,9) (7,1)", a: "-8" },
+  { q: "(3,4) (2,3)", a: "1" },
+  { q: "(5,3) (6,7)", a: "4" },
+  { q: "(9,6) (10,9)", a: "3" },
+  { q: "(8,4) (7,9)", a: "-5" },
+  { q: "(4,5) (7,7)", a: "0.67" },
+  { q: "(7,5) (9,7)", a: "1" },
+  { q: "(4,3) (5,6)", a: "3" },
+  { q: "(7,3) (9,9)", a: "3" },
+  { q: "(1,5) (2,6)", a: "1" },
+  { q: "(3,2) (7,4)", a: "0.5" },
+  { q: "(1,2) (6,5)", a: "0.6" },
+  { q: "(5,2) (7,3)", a: "0.5" },
+  { q: "(8,7) (6,4)", a: "1.5" },
+  { q: "(4,6) (9,6)", a: "0" },
+  { q: "(6,8) (9,9)", a: "0.33" },
+  { q: "(8,6) (4,7)", a: "-0.25" },
+  { q: "(6,5) (3,6)", a: "-0.33" },
+  { q: "(9,2) (11,6)", a: "2" },
+  { q: "(8,5) (9,6)", a: "1" },
+  { q: "(-3,5) (-8,6)", a: "-0.2" },
+  { q: "(-7,4) (-8,-1)", a: "5" },
+  { q: "(-4,2) (9,-5)", a: "-0.54" },
+  { q: "(-9,5) (-6,-7)", a: "-4" },
+  { q: "(-3,7) (9,-5)", a: "-1" },
+  { q: "(4,2) (6,-7)", a: "-4.5" },
+  { q: "(8,4) (9,6)", a: "2" }
 ];
 
 document.addEventListener("keydown", (e) => {
@@ -47,35 +60,42 @@ document.addEventListener("click", () => {
 });
 
 function showQuiz() {
-  const q = slopeQuestions[Math.floor(Math.random() * slopeQuestions.length)];
-  const [text, correctAnswer] = q;
+  const question = slopeQuestions[Math.floor(Math.random() * slopeQuestions.length)];
+  const correct = question.a;
+  const options = new Set([correct]);
 
-  const wrongAnswers = new Set();
-  while (wrongAnswers.size < 3) {
-    let fake = (Math.random() * 10 - 5).toFixed(2);
-    if (fake !== correctAnswer) wrongAnswers.add(fake);
+  while (options.size < 4) {
+    const fake = (Math.random() * 10 - 5).toFixed(2);
+    options.add(fake);
   }
 
-  const options = [...wrongAnswers, correctAnswer].sort(() => 0.5 - Math.random());
-
-  quizContainer.classList.remove("hidden");
-  quizQuestion.textContent = `Find the slope for ${text}`;
+  quizQuestion.textContent = `Find the slope for points: ${question.q}`;
   quizOptions.innerHTML = "";
 
-  options.forEach(opt => {
+  Array.from(options).sort(() => Math.random() - 0.5).forEach((opt) => {
     const btn = document.createElement("button");
     btn.textContent = opt;
     btn.onclick = () => {
-      if (opt === correctAnswer) {
+      if (opt === correct) {
         quizContainer.classList.add("hidden");
         startAiming();
       } else {
-        btn.style.background = "tomato";
-        setTimeout(() => quizContainer.classList.add("hidden"), 1000);
+        showIncorrect();
       }
     };
     quizOptions.appendChild(btn);
   });
+
+  quizContainer.classList.remove("hidden");
+}
+
+function showIncorrect() {
+  const overlay = document.getElementById("incorrect-overlay");
+  overlay.classList.remove("hidden");
+  setTimeout(() => {
+    overlay.classList.add("hidden");
+    quizContainer.classList.add("hidden");
+  }, 3000); // now pauses for 3 seconds
 }
 
 function startAiming() {
