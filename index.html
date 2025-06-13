@@ -9,37 +9,29 @@
 <body>
   <div id="game-container">
     <div id="score">Score: 0</div>
-
-    <!-- Target -->
+    <img id="bowImage" src="noammo.png" alt="Bow" />
+    <div id="timing-bar">
+      <div id="bar-tip"></div>
+    </div>
     <div id="target">
       <div class="ring red"></div>
       <div class="ring orange"></div>
       <div class="ring yellow"></div>
     </div>
+  </div>
 
-    <!-- Bow -->
-    <img id="bowImage" src="noammo.png" alt="Bow" />
-
-    <!-- Timing bar -->
-    <div id="timing-bar">
-      <div id="bar-bg"></div>
-      <div id="bar-tip"></div>
+  <div id="quiz-container" class="hidden">
+    <div id="quiz-box">
+      <h2 id="quiz-question">Question?</h2>
+      <div id="quiz-options"></div>
     </div>
+  </div>
 
-    <!-- Quiz -->
-    <div id="quiz-container" class="hidden">
-      <div class="quiz-box">
-        <div id="quiz-question"></div>
-        <div id="quiz-options"></div>
-      </div>
-    </div>
-
-    <!-- Incorrect Screen (hidden by default ✅) -->
-    <div id="incorrect-overlay" class="hidden">
-      <div class="incorrect-message">❌ You are incorrect</div>
-    </div>
+  <div id="incorrect-overlay" class="hidden">
+    <div class="incorrect-message">❌ You are incorrect</div>
   </div>
 
   <script src="script.js"></script>
 </body>
 </html>
+
