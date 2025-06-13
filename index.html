@@ -2,36 +2,35 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Exponent Archery</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Archery Game</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1 id="score">Score: 0</h1>
-
   <div id="game-container">
-    <div id="target">
-      <div class="ring red"></div>
-      <div class="ring orange"></div>
-      <div class="ring yellow"></div>
-    </div>
-
-    <div id="bow">
-      <img id="bowImage" src="noammo.png" alt="Bow" />
-    </div>
-
+    <div id="score">Score: 0</div>
+    <img id="target" src="target.png" alt="Target" />
+    <img id="bowImage" src="noammo.png" alt="Bow" />
+    
     <div id="timing-bar">
+      <div id="bar-bg"></div>
       <div id="bar-tip"></div>
     </div>
 
     <div id="quiz-container" class="hidden">
-      <div id="quiz-box">
-        <p id="quiz-question">Find the slope for...</p>
+      <div class="quiz-box">
+        <div id="quiz-question"></div>
         <div id="quiz-options"></div>
+      </div>
+    </div>
+
+    <div id="incorrect-overlay" class="hidden">
+      <div class="incorrect-message">
+        ❌ You are incorrect
       </div>
     </div>
   </div>
 
-  <p class="instructions">Press "E" to aim, answer correctly, then click to shoot!</p>
   <script src="script.js"></script>
 </body>
 </html>
