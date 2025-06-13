@@ -9,9 +9,15 @@
 <body>
   <div id="game-container">
     <div id="score">Score: 0</div>
-    <img id="target" src="target.png" alt="Target" />
+
+    <div id="target">
+      <div class="ring red"></div>
+      <div class="ring orange"></div>
+      <div class="ring yellow"></div>
+    </div>
+
     <img id="bowImage" src="noammo.png" alt="Bow" />
-    
+
     <div id="timing-bar">
       <div id="bar-bg"></div>
       <div id="bar-tip"></div>
@@ -25,9 +31,7 @@
     </div>
 
     <div id="incorrect-overlay" class="hidden">
-      <div class="incorrect-message">
-        ❌ You are incorrect
-      </div>
+      <div class="incorrect-message">❌ You are incorrect</div>
     </div>
   </div>
 
