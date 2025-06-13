@@ -25,30 +25,15 @@ const slopeQuestions = [
   { q: "(8,4) (7,9)", a: "-5" },
   { q: "(4,5) (7,7)", a: "0.67" },
   { q: "(7,5) (9,7)", a: "1" },
-  { q: "(4,3) (5,6)", a: "3" },
-  { q: "(7,3) (9,9)", a: "3" },
-  { q: "(1,5) (2,6)", a: "1" },
-  { q: "(3,2) (7,4)", a: "0.5" },
-  { q: "(1,2) (6,5)", a: "0.6" },
-  { q: "(5,2) (7,3)", a: "0.5" },
-  { q: "(8,7) (6,4)", a: "1.5" },
-  { q: "(4,6) (9,6)", a: "0" },
-  { q: "(6,8) (9,9)", a: "0.33" },
-  { q: "(8,6) (4,7)", a: "-0.25" },
-  { q: "(6,5) (3,6)", a: "-0.33" },
-  { q: "(9,2) (11,6)", a: "2" },
-  { q: "(8,5) (9,6)", a: "1" },
-  { q: "(-3,5) (-8,6)", a: "-0.2" },
-  { q: "(-7,4) (-8,-1)", a: "5" },
-  { q: "(-4,2) (9,-5)", a: "-0.54" },
-  { q: "(-9,5) (-6,-7)", a: "-4" },
-  { q: "(-3,7) (9,-5)", a: "-1" },
-  { q: "(4,2) (6,-7)", a: "-4.5" },
-  { q: "(8,4) (9,6)", a: "2" }
+  { q: "(4,3) (5,6)", a: "3" }
 ];
 
 document.addEventListener("keydown", (e) => {
-  if (e.key.toLowerCase() === "e" && !aiming) {
+  if (
+    e.key.toLowerCase() === "e" &&
+    !aiming &&
+    quizContainer.classList.contains("hidden")
+  ) {
     showQuiz();
   }
 });
@@ -95,7 +80,7 @@ function showIncorrect() {
   setTimeout(() => {
     overlay.classList.add("hidden");
     quizContainer.classList.add("hidden");
-  }, 3000); // now pauses for 3 seconds
+  }, 3000); // Pause for 3 seconds
 }
 
 function startAiming() {
@@ -139,11 +124,11 @@ function shoot() {
 
   let points = 0;
   if (distance <= 10) {
-    points = 9;
+    points = 9; // Yellow center
   } else if (distance <= 30) {
-    points = 6;
+    points = 6; // Orange mid-range
   } else {
-    points = 4;
+    points = 4; // Red outer
   }
 
   score += points;
