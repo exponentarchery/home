@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: 'Arial', sans-serif;
+  font-family: Arial, sans-serif;
   background: linear-gradient(to top, #6f9e58, #a2cc84);
   overflow: hidden;
 }
@@ -9,7 +9,6 @@ body {
   position: relative;
   width: 100vw;
   height: 100vh;
-  text-align: center;
 }
 
 #score {
@@ -18,7 +17,6 @@ body {
   left: 20px;
   font-size: 24px;
   font-weight: bold;
-  color: black;
   background: white;
   padding: 10px;
   border-radius: 10px;
@@ -29,6 +27,34 @@ body {
   right: 10%;
   top: 20%;
   width: 250px;
+  height: 250px;
+}
+
+.ring {
+  position: absolute;
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.red {
+  width: 250px;
+  height: 250px;
+  background: red;
+  z-index: 1;
+}
+.orange {
+  width: 170px;
+  height: 170px;
+  background: orange;
+  z-index: 2;
+}
+.yellow {
+  width: 90px;
+  height: 90px;
+  background: yellow;
+  z-index: 3;
 }
 
 #bowImage {
@@ -137,7 +163,6 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 20;
-  animation: flash 0.2s ease-in;
 }
 
 .incorrect-message {
