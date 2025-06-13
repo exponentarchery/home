@@ -136,3 +136,52 @@ body {
   color: white;
   font-size: 18px;
 }
+
+/* QUIZ STYLING */
+#quiz-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 15;
+}
+
+.hidden {
+  display: none;
+}
+
+#quiz-box {
+  background: white;
+  border: 2px solid #ccc;
+  padding: 20px;
+  max-width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#quiz-question {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+#quiz-options button {
+  display: block;
+  margin: 8px 0;
+  padding: 10px;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #999;
+  font-size: 16px;
+  background: #f0f0f0;
+  cursor: pointer;
+}
+
+#quiz-options button:hover {
+  background: #ddd;
+}
